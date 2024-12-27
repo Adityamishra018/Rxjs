@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="subs()">Click to subscribe</button>
+    <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+    <script>
+        function getPromise(){
+            return new Promise(res =>{
+                setTimeout(()=>{res(10)},1000)
+            })
+        }
+
+        function subs(){
+            obs1$.subscribe(console.log)
+        }
+
+        obs1$ = rxjs.defer(()=>rxjs.from(getPromise()))
+
+    </script>
+</body>
+</html>

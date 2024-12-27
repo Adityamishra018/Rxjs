@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    button{
+        margin: 20px;
+    }
+</style>
+<body>
+    
+    <button onclick="emitNext()">Click me to emit next val!</button>
+
+    <button onclick="complete()">Click me to complete observable</button>
+
+    <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+    <script>
+        obs1$ = new rxjs.Subject()
+
+        buffer = ['a','b','c','d','e']
+        i = 0;
+        function emitNext(){
+            if(i < buffer.length)
+                obs1$.next(buffer[i++])
+            else
+                complete()
+        }
+
+        function complete(){
+            obs1$.complete()
+        }
+
+        obs1$.pipe(
+            rxjs.switchMap(c =>{
+                return rxjs.interval(1000).pipe(
+                    rxjs.map(i => `${c} : ${i}`),
+                    rxjs.take(10)
+                )
+            })
+        ).subscribe(console.log)
+    </script>
+</body>
+</html>

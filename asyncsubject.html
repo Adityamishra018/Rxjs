@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    button{
+        margin: 20px;
+    }
+</style>
+<body>
+    
+    <button onclick="emit()">Click me to emit next val!</button>
+
+    <button onclick="complete()">Click me to complete observable</button>
+
+    <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+    <script>
+        obs1$ = new rxjs.AsyncSubject()
+        function emit(){
+            obs1$.next(Math.random())
+        }
+        function complete(){
+            obs1$.complete()
+        }
+        obs1$.subscribe(console.log)
+    </script>
+</body>
+</html>

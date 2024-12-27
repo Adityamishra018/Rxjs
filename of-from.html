@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+    <script>
+        let arr = [1,2,3,4,5,6,7]
+        obs1$ = rxjs.of(arr)
+        obs1$.pipe(
+            rxjs.count()
+        ).subscribe(console.log)
+        obs1$.subscribe(console.log)
+
+        obs2$ = rxjs.from(arr)
+        obs2$.pipe(
+            rxjs.count()
+        ).subscribe(console.log)
+        obs2$.subscribe(console.log)
+    </script>
+</body>
+</html>

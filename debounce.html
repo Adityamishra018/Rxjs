@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+    <script>
+        document.addEventListener('click',e=>{
+            console.log(`clicked on `,new Date)
+        })
+
+        //last event after which 3sec has passed
+        obs1$ = rxjs.fromEvent(document,'click')
+        obs1$.pipe(
+            rxjs.debounceTime(3000)
+        ).subscribe(e => {console.log(e,new Date)})
+    </script>
+</body>
+</html>
