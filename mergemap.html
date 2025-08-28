@@ -12,6 +12,8 @@
 </style>
 <body>
     
+    <h2>Open your console on the side and work on the buttons 🔥</h2>
+
     <button onclick="emitNext()">Click me to emit next val!</button>
 
     <button onclick="complete()">Click me to complete observable</button>
@@ -34,10 +36,15 @@
         }
 
         obs1$.pipe(
+            /*
+            Unlike concatMap which processes inner observables sequentially, mergeMap runs them in parallel. mergeMap maps each value from a source observable to a new "inner" observable, subscribes to all of these inner observables immediately, and then merges their output into a single stream.
+
+            Press on emit value twice, and watch how output streams will get interleaved.
+            */
             rxjs.mergeMap(c =>{
                 return rxjs.interval(1000).pipe(
                     rxjs.map(i => `${c} : ${i}`),
-                    rxjs.take(10)
+                    rxjs.take(10)  //after taking 10 automatically calls complete
             )})
         ).subscribe(console.log)
     </script>

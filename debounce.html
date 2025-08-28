@@ -6,16 +6,21 @@
     <title>Document</title>
 </head>
 <body>
+
+    <h2>Open your console on the side and work on the buttons 🔥</h2>
     
     <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
-    <script>
-        document.addEventListener('click',e=>{
-            console.log(`clicked on `,new Date)
-        })
+    <button id="spam">Spam Button ! </button>
 
-        //last event after which 3sec has passed
-        obs1$ = rxjs.fromEvent(document,'click')
+    <script>
+        obs1$ = rxjs.fromEvent(document.getElementById("spam"),'click')
+
         obs1$.pipe(
+            /*
+                debounce operator (most commonly seen as debounceTime) controls the rate of emissions from a source observable. It waits for a specified period of inactivity and then emits only the last value that was received during that time. 
+
+                press on spam button repeatedly, and still console will remain clean with atmost one event every 3 sec.
+            */
             rxjs.debounceTime(3000)
         ).subscribe(e => {console.log(e,new Date)})
     </script>

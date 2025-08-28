@@ -11,6 +11,7 @@
     }
 </style>
 <body>
+    <h2>Open your console on the side and work on the buttons 🔥</h2>
     
     <button onclick="emitNext()">Click me to emit next val!</button>
 
@@ -34,6 +35,13 @@
         }
 
         obs1$.pipe(
+            /*
+                exhaustMap operator in RxJS maps each value from a source observable to an "inner" observable, but it ignores all new values from the source while that inner observable is still active. It waits for the current inner observable to complete before accepting and processing the next value from the source. 
+
+                This behavior is perfect for scenarios where you want to prevent multiple requests or actions from happening at the same time, such as preventing double clicks on a submit button
+
+                Compare this with MergeMap and ConcatMap.
+            */
             rxjs.exhaustMap(c =>{
                 return rxjs.interval(1000).pipe(
                     rxjs.map(i => `${c} : ${i}`),

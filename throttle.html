@@ -6,18 +6,19 @@
     <title>Document</title>
 </head>
 <body>
+    <h2>Open your console on the side and work on the buttons 🔥</h2>
     
+    <button id="throttle">Your clicks will be throttled !!</button>
     <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
     <script>
-        document.addEventListener('click',e=>{
-            console.log(`clicked on `,new Date)
-        })
+        /*
+            The throttleTime operator in RxJS emits a value from the source observable, then ignores any subsequent values for a specified time duration. This process repeats, ensuring that emissions occur at a controlled and regular rate.
 
-
-        //only 1st clicked is picked in 3sec interval
-        obs1$ = rxjs.fromEvent(document,'click')
+            Essentially it takes an event then shuts off for sometime. useful when you want to process only limited requests.
+        */
+        obs1$ = rxjs.fromEvent(document.getElementById("throttle"),'click')
         obs1$.pipe(
-            rxjs.throttleTime(3000)
+            rxjs.throttleTime(3000)  //ignoring all subsequent events for 3 seconds
         ).subscribe(e => {console.log(e,new Date)})
     </script>
 </body>

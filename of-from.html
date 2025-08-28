@@ -6,21 +6,31 @@
     <title>Document</title>
 </head>
 <body>
-    
+
+    <h2>Open your console on the side and work on the buttons 🔥</h2>
+
+    <button onclick="emitObsOf()">Emit Obs "of" an Array</button>
+    <button onclick="emitObsFrom()">Emit Obs "from" an Array</button>
     <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+
     <script>
         let arr = [1,2,3,4,5,6,7]
-        obs1$ = rxjs.of(arr)
-        obs1$.pipe(
-            rxjs.count()
-        ).subscribe(console.log)
-        obs1$.subscribe(console.log)
 
-        obs2$ = rxjs.from(arr)
-        obs2$.pipe(
-            rxjs.count()
-        ).subscribe(console.log)
-        obs2$.subscribe(console.log)
+        function emitObsOf(){
+            obs1$ = rxjs.of(arr)
+            obs1$.pipe(
+                rxjs.count()  //1
+            ).subscribe(console.log)
+            obs1$.subscribe(console.log)  //Array obj
+        }
+
+        function emitObsFrom(){
+            obs2$ = rxjs.from(arr)
+            obs2$.pipe(
+                rxjs.count()  //7
+            ).subscribe(console.log)
+            obs2$.subscribe(console.log)  //individual item
+        }
     </script>
 </body>
 </html>

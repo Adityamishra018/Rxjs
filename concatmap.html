@@ -11,7 +11,8 @@
     }
 </style>
 <body>
-    
+    <h2>Open your console on the side and work on the buttons 🔥</h2>
+        
     <button onclick="emitNext()">Click me to emit next val!</button>
 
     <button onclick="complete()">Click me to complete observable</button>
@@ -34,6 +35,14 @@
         }
 
         obs1$.pipe(
+            /*
+            concatMap is a higher-order mapping operator that processes a stream of observables sequentially. It maps each value from a source observable to a new "inner" observable, subscribes to it, and waits for that inner observable to complete before moving on to the next value from the source
+
+            Press on emit value twice, and watch how output streams will wait and come one after the other.
+
+            (see MergeMap for slightly different behaviour)
+            */
+
             rxjs.concatMap(c =>{
                 return rxjs.interval(1000).pipe(
                     rxjs.map(i => `${c} : ${i}`),

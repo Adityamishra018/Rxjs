@@ -6,15 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h2>Open your console on the side and work on the buttons 🔥</h2>
+        
     <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+    <button onclick="emit()">Click to emit observable</button>
     <script>
-        let arr = [1,2,3,4,5,6,7]
-        obs1$ = rxjs.from(arr)
-        obs1$.pipe(
-            rxjs.filter(e => e % 2 == 0),
-            rxjs.count()
-        ).subscribe(console.log)
+        function emit(){
+            let arr = [1,2,3,4,5,6,7]
+            obs1$ = rxjs.from(arr)
+            obs1$.pipe(
+                rxjs.filter(e => e % 2 == 0), //[2,4,6]
+                rxjs.count() //3
+            ).subscribe(console.log)
+        }
     </script>
 </body>
 </html>

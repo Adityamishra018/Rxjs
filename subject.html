@@ -11,6 +11,7 @@
     }
 </style>
 <body>
+    <h2>Open your console on the side and work on the buttons 🔥</h2>
     
     <button onclick="emit()">Click me to emit next val!</button>
 
@@ -18,6 +19,19 @@
 
     <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
     <script>
+        /*
+        Unlike a standard Observable, which is unicast and creates a new execution for each Observer, a Subject is multicast. 
+        
+        This means:
+        A Subject maintains a list of its subscribers.
+        When it receives a value, it iterates through its list of subscribers and emits the value to each one.
+        The Subject itself can be subscribed to just like an Observable.
+
+        A plain Subject does not have any memory of past values. It only emits values to Observers that are subscribed at the moment the value is emitted. Any new subscriber will only receive values that are emitted after they have subscribed.
+
+        Subjects are often used to create a simple event bus for communication between different parts of an application that are not directly related.You can use a Subject to bridge a synchronous event source (like a button click) to an asynchronous Observable stream.
+
+        */
         obs1$ = new rxjs.Subject()
         function emit(){
             obs1$.next(Math.random())
